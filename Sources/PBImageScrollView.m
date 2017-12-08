@@ -156,6 +156,9 @@
 }
 
 - (void)_updateUserInterfaces {
+    if (self.dismissing) {
+        return;
+    }
     [self setZoomScale:1.0f animated:YES];
     [self _updateFrame];
     [self _recenterImage];
@@ -199,9 +202,13 @@
     CGFloat selfHeight = CGRectGetHeight(self.bounds);
     if (imageSize.width <= selfWidth && imageSize.height <= selfHeight) {
         self.maximumZoomScale = 1.0f;
+        self.minimumZoomScale = imageSize.width/selfWidth;
     } else {
+        self.minimumZoomScale = 1.f;
         self.maximumZoomScale = MAX(MIN(imageSize.width / selfWidth, imageSize.height / selfHeight), 3.0f);
     }
+    
+    self.maximumZoomScale = 3.f;
 }
 
 /// Only + percent.
@@ -312,7 +319,7 @@
         return;
     }
     if (scrollView.zoomScale < 1) {
-        [scrollView setZoomScale:1.0f animated:YES];
+//        [scrollView setZoomScale:1.0f animated:YES];
     }
 }
 
