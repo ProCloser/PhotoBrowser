@@ -26,8 +26,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PBImageViewDelegate;
+
 @interface PBImageScrollView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic, strong, readonly) UIImageView *imageView;
+
+-(instancetype)initWithCustomImageDlg:(_Nullable id<PBImageViewDelegate>)delegate;
+
+@end
+
+@protocol PBImageViewDelegate <NSObject>
+
+-( UIImageView * _Nonnull )PBImageScrollViewWithCustomImgv;
 
 @end

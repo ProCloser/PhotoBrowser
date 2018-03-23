@@ -66,11 +66,13 @@
 
 
 #pragma mark - PBViewController
+@protocol PBImageViewDelegate;
 
 @interface PBViewController : UIPageViewController
 
 @property (nonatomic, weak, nullable) id<PBViewControllerDataSource> pb_dataSource;
 @property (nonatomic, weak, nullable) id<PBViewControllerDelegate> pb_delegate;
+@property (nonatomic, weak, nullable) id<PBImageViewDelegate> pb_imgvDelegate;
 
 @property (nonatomic, assign) NSInteger startPage;
 @property (nonatomic, assign) NSInteger pb_startPage;

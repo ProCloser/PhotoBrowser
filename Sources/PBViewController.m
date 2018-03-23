@@ -640,7 +640,7 @@ static const NSUInteger reusable_page_count = 3;
     if (!_reusableImageScrollerViewControllers) {
         NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity:reusable_page_count];
         for (NSInteger index = 0; index < reusable_page_count; index++) {
-            PBImageScrollerViewController *imageScrollerViewController = [PBImageScrollerViewController new];
+            PBImageScrollerViewController *imageScrollerViewController = [[PBImageScrollerViewController alloc] initWithImageViewDelegate:_pb_imgvDelegate];
             imageScrollerViewController.page = index;
             __weak typeof(self) weak_self = self;
             imageScrollerViewController.imageScrollView.contentOffSetVerticalPercentHandler = ^(CGFloat percent) {

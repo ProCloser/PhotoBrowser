@@ -38,6 +38,8 @@
 @property (nonatomic, assign) CGFloat velocity;
 @property (nonatomic, assign) BOOL dismissing;
 
+@property (nonatomic, weak, nullable) id<PBImageViewDelegate> pbimg_delegate;
+
 @end
 
 @implementation PBImageScrollView
@@ -50,12 +52,27 @@
 
 #pragma mark - respondsToSelector
 
+-(instancetype)initWithCustomImageDlg:(id<PBImageViewDelegate>)delegate{
+    if (self = [super init]) {
+        _pbimg_delegate = delegate;
+        [self commonInit];
+    }
+    return self;
+}
+
 - (instancetype)init {
     self = [super init];
     if (!self) {
         return nil;
     }
+    
+    [self commonInit];
+    
+    return self;
+}
 
+-(void)commonInit{
+    
 #ifdef __IPHONE_11_0
     if (@available(iOS 11.0, *)) {
         self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -74,8 +91,6 @@
     [self addSubview:self.imageView];
     [self _addObserver];
     [self _addNotificationIfNeeded];
-    
-    return self;
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -331,9 +346,15 @@
 
 - (UIImageView *)imageView {
     if (!_imageView) {
-        _imageView = [UIImageView new];
-        _imageView.contentMode = UIViewContentModeScaleAspectFill;
-        _imageView.clipsToBounds = YES;
+        if ([_pbimg_delegate respondsToSelector:@selector(PBImageScrollViewWithCustomImgv)]) {
+            _imageView = [_pbimg_delegate PBImageScrollViewWithCustomImgv];
+            
+        }else{
+            _imageView = [UIImageView new];
+            _imageView.contentMode = UIViewContentModeScaleAspectFill;
+            _imageView.clipsToBounds = YES;
+            
+        }
     }
     return _imageView;
 }

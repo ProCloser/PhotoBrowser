@@ -33,12 +33,22 @@
 @property (nonatomic, weak, readwrite) UIImageView *imageView;
 @property (nonatomic, strong, readwrite) CAShapeLayer *progressLayer;
 @property (nonatomic, assign) BOOL dismissing;
+
+@property (nonatomic, weak) id<PBImageViewDelegate> pbimg_dlg;
+
 @end
 
 @implementation PBImageScrollerViewController
 
 - (void)dealloc {
     PBLog(@"~~~~~~~~~~~%s~~~~~~~~~~~", __FUNCTION__);
+}
+
+-(instancetype)initWithImageViewDelegate:(id<PBImageViewDelegate>)delegate{
+    if (self = [super init]) {
+        _pbimg_dlg = delegate;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -113,7 +123,7 @@
 
 - (PBImageScrollView *)imageScrollView {
     if (!_imageScrollView) {
-        _imageScrollView = [PBImageScrollView new];
+        _imageScrollView = [[PBImageScrollView alloc] initWithCustomImageDlg:_pbimg_dlg];
     }
     return _imageScrollView;
 }

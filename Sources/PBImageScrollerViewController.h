@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 
 @class PBImageScrollView;
+@protocol PBImageViewDelegate;
 typedef void(^PBImageDownloadProgressHandler)(NSInteger receivedSize, NSInteger expectedSize);
 
 @interface PBImageScrollerViewController : UIViewController
@@ -44,5 +45,8 @@ typedef void(^PBImageDownloadProgressHandler)(NSInteger receivedSize, NSInteger 
 @property (nonatomic, strong, readonly) PBImageScrollView *imageScrollView;
 
 - (void)reloadData;
+
+-(instancetype)initWithImageViewDelegate:(id<PBImageViewDelegate>)delegate;
+
 
 @end
