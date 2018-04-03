@@ -92,7 +92,7 @@ static const NSUInteger reusable_page_count = 3;
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     self.transitioningDelegate = self;
     _contentsRect = CGRectMake(0, 0, 1, 1);
-    _blurBackground = YES;
+//    _blurBackground = YES;
     _hideThumb = YES;
     
     return self;
@@ -126,6 +126,7 @@ static const NSUInteger reusable_page_count = 3;
     [super viewWillLayoutSubviews];
     [self _updateIndicator];
     [self _updateBlurBackgroundView];
+
 }
 
 #pragma mark - Public method
