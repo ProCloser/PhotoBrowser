@@ -82,6 +82,10 @@
 - (void)reloadData {
     [self _prepareForReuse];
     [self _loadData];
+    if (self.imageScrollView.contentOffSetVerticalPercentHandler) {
+        self.imageScrollView.contentOffSetVerticalPercentHandler(0.0001);
+    }
+
 }
 
 #pragma mark - Private methods

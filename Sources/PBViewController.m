@@ -31,6 +31,8 @@
 #import "PBImageScrollView+internal.h"
 #import "PBPresentAnimatedTransitioningController.h"
 
+#define kStartBlurAlpha 1.f
+
 static const NSUInteger reusable_page_count = 3;
 
 @interface PBViewController () <
@@ -359,7 +361,7 @@ static const NSUInteger reusable_page_count = 3;
 
 - (void)_onPresent {
     PBImageScrollerViewController *currentScrollViewController = self.currentScrollViewController;
-    self.blurBackgroundView.alpha = 1;
+    self.blurBackgroundView.alpha = kStartBlurAlpha;
     [self _hideStatusBarIfNeeded];
     
     if (!self.currentThumbView) {
@@ -645,7 +647,7 @@ static const NSUInteger reusable_page_count = 3;
             __weak typeof(self) weak_self = self;
             imageScrollerViewController.imageScrollView.contentOffSetVerticalPercentHandler = ^(CGFloat percent) {
                 __strong typeof(weak_self) strong_self = weak_self;
-                CGFloat alpha = 1.0f - percent * 4;
+                CGFloat alpha = kStartBlurAlpha - percent * 4;
                 if (alpha < 0) {
                     alpha = 0;
                 }
