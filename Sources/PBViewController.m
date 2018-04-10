@@ -172,7 +172,7 @@ static const NSUInteger reusable_page_count = 3;
     self.currentPage = 0 < self.currentPage && self.currentPage < self.numberOfPages ? self.currentPage : 0;
     PBImageScrollerViewController *firstImageScrollerViewController = [self _imageScrollerViewControllerForPage:self.currentPage];
     [self setViewControllers:@[firstImageScrollerViewController] direction:UIPageViewControllerNavigationDirectionForward animated:animated completion:nil];
-    [firstImageScrollerViewController reloadData];
+//    [firstImageScrollerViewController reloadData];
 }
 
 - (void)_addIndicator {
@@ -401,7 +401,7 @@ static const NSUInteger reusable_page_count = 3;
 - (void)_didPresented {
     self.currentScrollViewController.view.alpha = 1;
     self.currentScrollViewController.imageScrollView.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.currentScrollViewController reloadData];
+//    [self.currentScrollViewController reloadData];
     [self _hideIndicator];
 }
 
